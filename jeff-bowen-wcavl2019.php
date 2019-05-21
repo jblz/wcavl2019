@@ -45,7 +45,8 @@ class JB_WordCamp_Asheville_2019 {
 		wp_register_script( 'core-data', includes_url( 'js/dist/core-data.js' ), [ 'data' ] );
 		wp_register_script( 'i18n', includes_url( 'js/dist/i18n.js' ) );
 		wp_register_script( 'is-shallow-equal', includes_url( 'js/dist/is-shallow-equal.js' ) );
-		wp_register_script( 'components', includes_url( 'js/dist/components.js' ), [ 'moment', 'i18n', 'is-shallow-equal' ] );
+		wp_register_script( 'keycodes', includes_url( 'js/dist/keycodes.js' ) );
+		wp_register_script( 'components', includes_url( 'js/dist/components.js' ), [ 'moment', 'i18n', 'is-shallow-equal', 'keycodes' ] );
 		wp_register_script( 'nux', includes_url( 'js/dist/nux.js' ), [ 'data', 'components' ] );
 		wp_register_script( 'priority-queue', includes_url( 'js/dist/priority-queue.js' ) );
 		wp_register_script( 'autop', includes_url( 'js/dist/autop.js' ) );
