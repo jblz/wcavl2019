@@ -24,7 +24,7 @@ class JB_WordCamp_Asheville_2019 {
 			self::demo1();
 			return;
 		}
-	
+
 		if ( $post_id === 1237 ) {
 			self::demo2();
 			return;
