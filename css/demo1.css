@@ -1,0 +1,12 @@
+.demo-1-tip-target {
+	display: inline-block;
+	min-height: 52px;
+	margin-left: 4px;
+	vertical-align: middle;
+}
+.demo-1-button-wrapper .components-popover__content {
+	border-radius: 1px;
+	background-color: rgb(244, 91, 91);
+	color: rgb(39, 247, 20);
+	box-shadow: 0 8px 6px -6px black;
+}
