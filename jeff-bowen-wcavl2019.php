@@ -31,14 +31,8 @@ class JB_WordCamp_Asheville_2019 {
 		}
 	}
 
-	static function demo1() {
-		wp_enqueue_script( 'wp-polyfill', includes_url( 'js/dist/wp-polyfill.js' ) );
-
-		wp_enqueue_style( 'nux', includes_url( 'css/dist/nux/style.css' ) );
-		wp_enqueue_style( 'components', includes_url( 'css/dist/components/style.css' ) );
-
-		wp_enqueue_style( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'css/demo1.css' );
-
+	static function register_package_scripts() {
+		wp_register_script( 'wp-polyfill', includes_url( 'js/dist/wp-polyfill.js' ) );
 		wp_register_script( 'element', includes_url( 'js/dist/element.js' ), [ 'react', 'react-dom' ] );
 		wp_register_script( 'compose', includes_url( 'js/dist/compose.js' ) );
 		wp_register_script( 'data', includes_url( 'js/dist/data.js' ), [ 'lodash', 'element', 'priority-queue', 'compose', 'is-shallow-equal' ] );
@@ -51,8 +45,25 @@ class JB_WordCamp_Asheville_2019 {
 		wp_register_script( 'priority-queue', includes_url( 'js/dist/priority-queue.js' ) );
 		wp_register_script( 'autop', includes_url( 'js/dist/autop.js' ) );
 		wp_register_script( 'viewport', includes_url( 'js/dist/viewport.js' ) );
+		wp_register_script( 'wordcount', includes_url( 'js/dist/wordcount.js' ) );
+		//wp_register_script( 'escape-html', includes_url( 'js/dist/escape-html.js' ) );
+	}
 
-		wp_enqueue_script( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'js/demo1.js', [ 'nux', 'autop', 'element', 'i18n' ], null, true );
+	static function demo1() {
+		wp_enqueue_style( 'nux', includes_url( 'css/dist/nux/style.css' ) );
+		wp_enqueue_style( 'components', includes_url( 'css/dist/components/style.css' ) );
+		wp_enqueue_style( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'css/demo1.css' );
+
+		self::register_package_scripts();
+
+		wp_enqueue_script( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'js/demo1.js', [
+			'wp-polyfill', // Write ES2015+ more confidently
+			'nux', // Focus attention and show guided tours
+			'autop', // Insert paragraph tags (Auto <p></p> for line breaks)
+			'element', // WordPress' abstraction on top of React
+			'i18n', // "Internationalization" -- localize your UI for various audiences
+			'wordcount', // The Trouble with Tribbles
+		], null, true );
 	}
 	static function demo2() {
 		wp_enqueue_script( 'jbwca19_demo2', plugin_dir_url( __FILE__ ) . 'js/demo2.js', null, 1, true );
