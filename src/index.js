@@ -1,10 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './demo2';
 
-const App = ( props = {} ) => {
-	return (
-		<div>
-			Hello world!
-		</div>
-	);
-}
-export default App;
+ReactDOM.render( <App />, document.querySelector( 'article .entry-content' ) );

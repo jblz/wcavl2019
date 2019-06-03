@@ -66,7 +66,11 @@ class JB_WordCamp_Asheville_2019 {
 		], null, true );
 	}
 	static function demo2() {
-		wp_enqueue_script( 'jbwca19_demo2', plugin_dir_url( __FILE__ ) . 'js/demo2.js', null, 1, true );
+		self::register_package_scripts();
+
+		wp_enqueue_script( 'jbwca19_demo2', plugin_dir_url( __FILE__ ) . 'build/index.js', [
+			'element',
+		], 1, true );
 	}
 }
 add_action( 'wp', [ 'JB_WordCamp_Asheville_2019', 'wp' ] );
