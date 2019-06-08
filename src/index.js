@@ -20,7 +20,7 @@ switch ( demoNum ) {
 	default:
 		ReactDOM.render(
 			<div>
-				Demo not found
+				Error: Demo not found
 				<hr />
 				{ `demoNum: ${ demoNum }` }
 			</div>,

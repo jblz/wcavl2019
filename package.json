@@ -20,5 +20,10 @@
     "start": "wp-scripts start",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
+  },
+  "dependencies": {
+    "@wordpress/api-fetch": "^3.2.0",
+    "@wordpress/compose": "^3.3.0",
+    "@wordpress/data": "^4.5.0"
   }
 }

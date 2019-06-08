@@ -49,6 +49,8 @@ class JB_WordCamp_Asheville_2019 {
 		wp_register_script( 'nux', includes_url( 'js/dist/nux.js' ), [ 'data', 'components' ] );
 		wp_register_script( 'priority-queue', includes_url( 'js/dist/priority-queue.js' ) );
 		wp_register_script( 'autop', includes_url( 'js/dist/autop.js' ) );
+		wp_register_script( 'url', includes_url( 'js/dist/url.js' ) );
+		wp_register_script( 'api-fetch', includes_url( 'js/dist/api-fetch.js' ), [ 'i18n', 'url' ] );
 		wp_register_script( 'viewport', includes_url( 'js/dist/viewport.js' ) );
 		wp_register_script( 'wordcount', includes_url( 'js/dist/wordcount.js' ) );
 		//wp_register_script( 'escape-html', includes_url( 'js/dist/escape-html.js' ) );
@@ -75,8 +77,18 @@ class JB_WordCamp_Asheville_2019 {
 		self::register_package_scripts();
 
 		wp_register_script( 'jbwca19_built_demos', plugin_dir_url( __FILE__ ) . 'build/index.js', [
+			/**
+			 * Even though this app is built, dependencies are "extracted" by default.
+			 * If you want to build these into your app, see the advanced usage info
+			 * for the @wordpress/scripts package:
+			 *
+			 * * https://developer.wordpress.org/block-editor/packages/packages-scripts/#advanced-usage
+			 * * https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/
+			 */
 			'element',
+			'api-fetch',
 		], 1, true );
+
 		wp_localize_script( 'jbwca19_built_demos', 'jbwca19', [
 			'demoNum' => $demo_num,
 		] );
