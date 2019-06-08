@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Demo2 from './demo2';
+import Demo3 from './demo3';
 import get from 'lodash/get';
 
 const demoNum = get( window, 'jbwca19.demoNum' );
@@ -14,7 +15,7 @@ switch ( demoNum ) {
 		ReactDOM.render( <Demo2 />, element );
 		break;
 	case '3':
-		ReactDOM.render( <div>Demo 3</div>, element );
+		ReactDOM.render( <Demo3 />, element );
 		break;
 	default:
 		ReactDOM.render(
