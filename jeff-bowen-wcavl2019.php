@@ -26,7 +26,12 @@ class JB_WordCamp_Asheville_2019 {
 		}
 
 		if ( $post_id === 1237 ) {
-			self::demo2();
+			self::built_demo( 2 );
+			return;
+		}
+
+		if ( $post_id === 1248 ) {
+			self::built_demo( 3 );
 			return;
 		}
 	}
@@ -65,12 +70,18 @@ class JB_WordCamp_Asheville_2019 {
 			'wordcount', // The Trouble with Tribbles
 		], null, true );
 	}
-	static function demo2() {
+
+	static function built_demo( $demo_num ) {
 		self::register_package_scripts();
 
-		wp_enqueue_script( 'jbwca19_demo2', plugin_dir_url( __FILE__ ) . 'build/index.js', [
+		wp_register_script( 'jbwca19_built_demos', plugin_dir_url( __FILE__ ) . 'build/index.js', [
 			'element',
 		], 1, true );
+		wp_localize_script( 'jbwca19_built_demos', 'jbwca19', [
+			'demoNum' => $demo_num,
+		] );
+		wp_enqueue_script( 'jbwca19_built_demos' );
 	}
 }
+
 add_action( 'wp', [ 'JB_WordCamp_Asheville_2019', 'wp' ] );
