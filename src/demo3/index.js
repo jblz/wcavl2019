@@ -11,8 +11,10 @@ import apiFetch from '@wordpress/api-fetch';
 import { escapeAttribute, escapeHTML } from '@wordpress/escape-html';
 import { __ } from '@wordpress/i18n';
 
+const POST_ID = 1244; //1243;
+
 const fetchPost = () =>
-	apiFetch( { path: '/wp-json/wp/v2/pages/1244' } ).then( post => {
+	apiFetch( { path: `/wp-json/wp/v2/pages/${ POST_ID }` } ).then( post => {
 		const title = get( post, 'title.rendered', '' );
 		const link = get( post, 'link' );
 		const titleLink = link
