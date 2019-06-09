@@ -34,12 +34,18 @@ class JB_WordCamp_Asheville_2019 {
 			self::built_demo( 3 );
 			return;
 		}
+
+		if ( $post_id === 1251 ) {
+			self::built_demo( 4 );
+			return;
+		}
 	}
 
 	static function register_package_scripts() {
 		wp_register_script( 'wp-polyfill', includes_url( 'js/dist/wp-polyfill.js' ) );
+		wp_register_script( 'date', includes_url( 'js/dist/date.js' ) );
 		wp_register_script( 'element', includes_url( 'js/dist/element.js' ), [ 'react', 'react-dom' ] );
-		wp_register_script( 'compose', includes_url( 'js/dist/compose.js' ) );
+		wp_register_script( 'compose', includes_url( 'js/dist/compose.js' ), [ 'lodash' ] );
 		wp_register_script( 'data', includes_url( 'js/dist/data.js' ), [ 'lodash', 'element', 'priority-queue', 'compose', 'is-shallow-equal' ] );
 		wp_register_script( 'core-data', includes_url( 'js/dist/core-data.js' ), [ 'data' ] );
 		wp_register_script( 'i18n', includes_url( 'js/dist/i18n.js' ) );
@@ -53,7 +59,7 @@ class JB_WordCamp_Asheville_2019 {
 		wp_register_script( 'api-fetch', includes_url( 'js/dist/api-fetch.js' ), [ 'i18n', 'url' ] );
 		wp_register_script( 'viewport', includes_url( 'js/dist/viewport.js' ) );
 		wp_register_script( 'wordcount', includes_url( 'js/dist/wordcount.js' ) );
-		//wp_register_script( 'escape-html', includes_url( 'js/dist/escape-html.js' ) );
+		wp_register_script( 'escape-html', includes_url( 'js/dist/escape-html.js' ) );
 	}
 
 	static function demo1() {
@@ -67,9 +73,11 @@ class JB_WordCamp_Asheville_2019 {
 			'wp-polyfill', // Write ES2015+ more confidently
 			'nux', // Focus attention and show guided tours
 			'autop', // Insert paragraph tags (Auto <p></p> for line breaks)
+			'date', // Stardate -303563.2417554541
 			'element', // WordPress' abstraction on top of React
 			'i18n', // "Internationalization" -- localize your UI for various audiences
 			'wordcount', // The Trouble with Tribbles
+			'escape-html', // Prevent troublesome characters -- it's only logical 🖖
 		], null, true );
 	}
 
@@ -85,8 +93,10 @@ class JB_WordCamp_Asheville_2019 {
 			 * * https://developer.wordpress.org/block-editor/packages/packages-scripts/#advanced-usage
 			 * * https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/
 			 */
-			'element',
 			'api-fetch',
+			'data',
+			'element',
+			'escape-html',
 		], 1, true );
 
 		wp_localize_script( 'jbwca19_built_demos', 'jbwca19', [
