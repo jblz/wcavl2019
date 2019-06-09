@@ -65,11 +65,11 @@ class JB_WordCamp_Asheville_2019 {
 	static function demo1() {
 		wp_enqueue_style( 'nux', includes_url( 'css/dist/nux/style.css' ) );
 		wp_enqueue_style( 'components', includes_url( 'css/dist/components/style.css' ) );
-		wp_enqueue_style( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'css/demo1.css' );
+		wp_enqueue_style( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'src/demo1/styles.css' );
 
 		self::register_package_scripts();
 
-		wp_enqueue_script( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'js/demo1.js', [
+		wp_enqueue_script( 'jbwca19_demo1', plugin_dir_url( __FILE__ ) . 'src/demo1/index.js', [
 			'wp-polyfill', // Write ES2015+ more confidently
 			'nux', // Focus attention and show guided tours
 			'autop', // Insert paragraph tags (Auto <p></p> for line breaks)
