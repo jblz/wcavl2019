@@ -1,13 +1,18 @@
-( function( { autop, element, escapeHTML, i18n, nux, wordcount } ) {
+( function( { autop, date, element, escapeHtml, i18n, nux, wordcount } ) {
 	// src: https://stackoverflow.com/a/23234031/5883953
 	function isElementInViewport( el ) {
 		const rect = el.getBoundingClientRect();
-		return ! ( rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight );
+		return ! (
+			rect.bottom < 0 ||
+			rect.right < 0 ||
+			rect.left > window.innerWidth ||
+			rect.top > window.innerHeight
+		);
 	}
 
 	const el = document.querySelector( 'article .entry-content' );
 
-	const contentMabyeFromAnAPI = `These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
+	const contentMaybeFromAnAPI = `These are the voyages of the Starship Enterprise. Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before. We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field. Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.
 
 	Now what are the possibilities of warp drive? Cmdr Riker's nervous system has been invaded by an unknown microorganism. The organisms fuse to the nerve, intertwining at the molecular level. That's why the transporter's biofilters couldn't extract it. The vertex waves show a K-complex corresponding to an REM state. The engineering section's critical. Destruction is imminent. Their robes contain ultritium, highly explosive, virtually undetectable by your transporter.
 
@@ -15,16 +20,17 @@
 
 	`;
 
-	// @TODO escape HTML in contentMabyeFromAnAPI
-
-	let contentHTML = autop.autop( contentMabyeFromAnAPI );
-	const numWords = wordcount.count( contentMabyeFromAnAPI, 'words' );
+	let contentHTML = contentMaybeFromAnAPI;
+	const numWords = wordcount.count( contentMaybeFromAnAPI, 'words' );
 
 	contentHTML += `This high-quality content has ${ numWords } words!`;
 
-	el.innerHTML = contentHTML;
+	el.innerHTML = autop.autop( escapeHtml.escapeHTML( contentHTML ) );
 
 	const btn = document.createElement( 'button' );
+	btn.addEventListener( 'click', () =>
+		console.log( '"Stardate" ' + date.dateI18n( 'Y-m-d H:i:s' ) )
+	);
 
 	// Wrap UI components with translation functions
 	const { __ } = i18n;
@@ -38,10 +44,9 @@
 
 	wrapper.appendChild( btn );
 	wrapper.appendChild( tipTarget );
-	el.appendChild( wrapper )
+	el.appendChild( wrapper );
 
 	const vizInterval = setInterval( () => {
-
 		if ( ! isElementInViewport( tipTarget ) ) {
 			return;
 		}
@@ -50,9 +55,13 @@
 
 		setTimeout( () => {
 			element.render(
-				element.createElement( nux.DotTip, {
-					tipId: 'jbwca19-button-demo1'
-				}, __( 'Boldly go where no one has gone before!' ) ),
+				element.createElement(
+					nux.DotTip,
+					{
+						tipId: 'jbwca19-button-demo1',
+					},
+					__( 'Boldly go where no one has gone before!' )
+				),
 				tipTarget
 			);
 		}, 700 );
